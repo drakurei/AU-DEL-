@@ -265,6 +265,9 @@
   flex-wrap: wrap;
   gap: 1.6rem;
   border-top: 1px solid var(--glass-border);
+  background: rgba(229, 229, 229, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--color-silver-dim);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
@@ -397,6 +400,30 @@
     radial-gradient(120% 80% at 50% 0%, rgba(0, 71, 255, 0.18), transparent 60%),
     linear-gradient(180deg, transparent 40%, rgba(5, 5, 5, 0.85));
   z-index: 0;
+}
+
+/* Border beam: a light arc that travels the card outline, driven by scroll. */
+.explorer__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--beam, 0deg),
+    transparent 0deg,
+    transparent 230deg,
+    rgba(0, 71, 255, 0.5) 290deg,
+    #c9dbff 332deg,
+    #ffffff 346deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .explorer__card > * { position: relative; z-index: 1; }

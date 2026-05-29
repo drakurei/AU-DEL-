@@ -4,8 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // Pins the .explorer section and converts vertical scroll into a horizontal
-// translation of the card track. scrub:1 gives a smooth, slightly inertial feel
-// and a velocity-based skew adds depth as the track moves.
+// translation of the card track. A single scrubbed timeline also drives the
+// border-beam (conic-gradient angle) around each card and a velocity skew, so
+// everything stays in sync with the scroll.
 export default class HorizontalScroll {
   constructor(sectionSel = '#explorer', trackSel = '#explorer-track') {
     this.section = document.querySelector(sectionSel);
@@ -17,9 +18,7 @@ export default class HorizontalScroll {
 
     const setSkew = gsap.quickTo(cards, 'skewX', { duration: 0.4, ease: 'power3' });
 
-    gsap.to(this.track, {
-      x: () => -(this.track.scrollWidth - window.innerWidth),
-      ease: 'none',
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: this.section,
         start: 'top top',
@@ -34,5 +33,9 @@ export default class HorizontalScroll {
         },
       },
     });
+
+    tl.to(this.track, { x: () => -(this.track.scrollWidth - window.innerWidth), ease: 'none' }, 0);
+    // Light beam sweeps ~1.5 turns around each card across the section.
+    tl.fromTo(cards, { '--beam': '0deg' }, { '--beam': '540deg', ease: 'none' }, 0);
   }
 }
