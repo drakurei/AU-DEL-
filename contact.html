@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — AU-DELÀ</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='22' font-weight='700' fill='%230047ff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+    <meta name="description" content="Postulez au programme de coaching haute performance." />
+    <link rel="stylesheet" href="/styles/variables.css" />
+    <link rel="stylesheet" href="/styles/typography.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/components.css" />
+  </head>
+  <body>
+    <canvas id="webgl"></canvas>
+
+    <nav class="nav">
+      <a class="nav__logo" href="/index.html">AU-DELÀ</a>
+      <ul class="nav__links">
+        <li><a href="/index.html">Accueil</a></li>
+        <li><a href="/programmes.html">Programmes</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="section" style="min-height: auto; padding-top: 22vh">
+        <div class="wrap">
+          <p class="eyebrow">Postuler</p>
+          <h1 class="section-title" data-glitch>Parlons de votre cap</h1>
+          <p class="lead" style="margin-top: 1.4rem">
+            Quelques places sont ouvertes chaque trimestre. Décrivez votre
+            objectif — nous revenons vers vous sous 48 h.
+          </p>
+
+          <form class="form" id="contact-form" novalidate>
+            <input type="text" name="name" placeholder="Nom complet" required />
+            <input type="email" name="email" placeholder="Adresse e-mail" required />
+            <input type="text" name="objective" placeholder="Votre objectif principal" />
+            <textarea name="message" placeholder="Où en êtes-vous aujourd'hui ?"></textarea>
+            <button type="submit" class="btn-magnetic" data-magnetic style="margin-top: 0.5rem">
+              <span>Envoyer ma candidature</span>
+            </button>
+            <p id="form-status" style="color: var(--color-accent); font-size: 0.9rem"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 AU-DELÀ — Coaching haute performance</span>
+      <span>Mental · Physique · Business</span>
+    </footer>
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module">
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('form-status');
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.name.value || !form.email.value) {
+          status.style.color = '#ff5a5a';
+          status.textContent = 'Merci de renseigner votre nom et votre e-mail.';
+          return;
+        }
+        status.style.color = 'var(--color-accent)';
+        status.textContent = 'Candidature reçue. Nous revenons vers vous sous 48 h.';
+        form.reset();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+/* ---- Preloader: concentric thin circles + curtain reveal ---- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-black);
+  overflow: hidden;
+}
+
+/* Two curtain panels that part to reveal the page (no white flash). */
+.preloader__curtain {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--color-black);
+  z-index: 2;
+}
+.preloader__curtain--top { top: 0; }
+.preloader__curtain--bottom { bottom: 0; }
+
+.preloader__core {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.preloader__rings {
+  width: min(46vw, 320px);
+  height: min(46vw, 320px);
+  overflow: visible;
+}
+
+.preloader__rings circle {
+  fill: none;
+  stroke: var(--color-silver);
+  stroke-width: 0.5;
+  opacity: 0.85;
+}
+
+.preloader__brand {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--color-silver);
+  opacity: 0;
+}
+
+.preloader__count {
+  position: absolute;
+  bottom: 2.4rem;
+  right: 2.6rem;
+  z-index: 3;
+  font-family: var(--font-sans);
+  font-weight: 200;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  color: var(--color-silver);
+  letter-spacing: -0.04em;
+}

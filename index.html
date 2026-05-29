@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AU-DELÀ — Coaching haute performance</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='22' font-weight='700' fill='%230047ff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+    <meta name="description" content="Un parcours immersif de transformation mentale, physique et business pour ceux qui refusent leurs limites." />
+    <link rel="stylesheet" href="styles/variables.css" />
+    <link rel="stylesheet" href="styles/typography.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/preloader.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+  </head>
+  <body>
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+      <div class="preloader__curtain preloader__curtain--top"></div>
+      <div class="preloader__curtain preloader__curtain--bottom"></div>
+      <div class="preloader__core">
+        <svg class="preloader__rings" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring" cx="100" cy="100" r="90" />
+          <circle class="ring" cx="100" cy="100" r="70" />
+          <circle class="ring" cx="100" cy="100" r="50" />
+          <circle class="ring" cx="100" cy="100" r="30" />
+        </svg>
+        <div class="preloader__brand" id="preloader-brand">AU-DELÀ</div>
+      </div>
+      <div class="preloader__count" id="preloader-count">0</div>
+    </div>
+
+    <canvas id="webgl"></canvas>
+
+    <nav class="nav">
+      <a class="nav__logo" href="index.html">AU-DELÀ</a>
+      <ul class="nav__links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="programmes.html">Programmes</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- 01 — HERO (pinned) -->
+      <section class="section hero" id="hero">
+        <div class="hero__title wrap">
+          <p class="eyebrow">Coaching haute performance</p>
+          <h1 class="display" data-glitch>Au-delà de vos limites</h1>
+        </div>
+        <div class="hero__scroll">Défiler</div>
+      </section>
+
+      <!-- 02 — VISION (pinned text reveal) -->
+      <section class="section vision" id="vision">
+        <div class="wrap">
+          <p class="eyebrow">La vision</p>
+          <p class="vision__lead" data-vision>
+            Transformer la pression en discipline, la discipline en résultats,
+            les résultats en liberté.
+          </p>
+        </div>
+      </section>
+
+      <!-- 03 — EXPLORER (horizontal scroll) -->
+      <section class="section explorer" id="explorer">
+        <div class="explorer__inner">
+          <div class="explorer__head">
+            <p class="eyebrow">Explorer la méthode</p>
+            <h2 class="section-title">Trois piliers</h2>
+          </div>
+          <div class="explorer__track" id="explorer-track">
+            <article class="explorer__card">
+              <span class="bento__num">01</span>
+              <h3>Mental</h3>
+              <p>Reprogrammer vos croyances, installer une discipline inébranlable et transformer la pression en carburant.</p>
+            </article>
+            <article class="explorer__card">
+              <span class="bento__num">02</span>
+              <h3>Physique</h3>
+              <p>Énergie, sommeil, posture. Le corps comme socle de la haute performance.</p>
+            </article>
+            <article class="explorer__card">
+              <span class="bento__num">03</span>
+              <h3>Business</h3>
+              <p>Clarté stratégique, exécution et leadership pour passer un cap décisif.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 — PREUVES -->
+      <section class="section" id="preuves">
+        <div class="wrap" data-reveal>
+          <p class="eyebrow">Les preuves</p>
+          <h2 class="section-title">Des résultats, pas des promesses</h2>
+          <div class="stats">
+            <div>
+              <div class="stat__value" data-count="320" data-suffix="+">0</div>
+              <div class="stat__label">Clients accompagnés</div>
+            </div>
+            <div>
+              <div class="stat__value" data-count="94" data-suffix="%">0</div>
+              <div class="stat__label">Objectifs atteints</div>
+            </div>
+            <div>
+              <div class="stat__value" data-count="12" data-suffix=" ans">0</div>
+              <div class="stat__label">D'expérience terrain</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 — CTA -->
+      <section class="section cta" id="postuler">
+        <div class="wrap" data-reveal>
+          <p class="eyebrow">L'engagement</p>
+          <h2 class="section-title">Prêt à franchir le cap&nbsp;?</h2>
+          <a class="btn-magnetic" data-magnetic href="contact.html"><span>Postuler au programme</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 AU-DELÀ — Coaching haute performance</span>
+      <span>Mental · Physique · Business</span>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
