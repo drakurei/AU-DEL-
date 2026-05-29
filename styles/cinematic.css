@@ -1,0 +1,83 @@
+/* ---- Cinematic animated background (video-like, no file needed) ----
+   Slow-drifting blurred orbs + film grain + vignette evoke a dark nebula /
+   fluid in slow motion. A real <video> can later be layered in .cinematic-bg. */
+.cinematic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(120% 120% at 50% 20%, #0a0e1a 0%, #050505 60%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cinematic-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.cinematic-bg__orb--1 {
+  width: 60vw;
+  height: 60vw;
+  left: -10vw;
+  top: -8vw;
+  background: radial-gradient(circle, rgba(0, 71, 255, 0.55), transparent 65%);
+  animation: drift1 34s ease-in-out infinite;
+}
+
+.cinematic-bg__orb--2 {
+  width: 50vw;
+  height: 50vw;
+  right: -8vw;
+  top: 20vh;
+  background: radial-gradient(circle, rgba(70, 90, 200, 0.45), transparent 65%);
+  animation: drift2 46s ease-in-out infinite;
+}
+
+.cinematic-bg__orb--3 {
+  width: 44vw;
+  height: 44vw;
+  left: 25vw;
+  bottom: -12vw;
+  background: radial-gradient(circle, rgba(120, 130, 180, 0.30), transparent 65%);
+  animation: drift3 40s ease-in-out infinite;
+}
+
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 6vh) scale(1.15); }
+}
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-7vw, -5vh) scale(0.95); }
+}
+@keyframes drift3 {
+  0%, 100% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(5vw, -8vh) scale(1.2); }
+}
+
+/* Film grain overlay (SVG fractal noise). */
+.cinematic-bg__grain {
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+/* Darkening overlay + vignette for text legibility. */
+.cinematic-bg__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 100% at 50% 40%, transparent 30%, rgba(5, 5, 5, 0.75) 100%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.5), rgba(5, 5, 5, 0.2) 40%, rgba(5, 5, 5, 0.7));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-bg__orb { animation: none; }
+}

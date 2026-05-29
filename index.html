@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles/typography.css" />
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/preloader.css" />
+    <link rel="stylesheet" href="styles/cinematic.css" />
     <link rel="stylesheet" href="styles/components.css" />
   </head>
   <body>
@@ -29,7 +30,13 @@
       <div class="preloader__count" id="preloader-count">0</div>
     </div>
 
-    <canvas id="webgl"></canvas>
+    <div class="cinematic-bg" id="cinematic-bg" aria-hidden="true">
+      <div class="cinematic-bg__orb cinematic-bg__orb--1"></div>
+      <div class="cinematic-bg__orb cinematic-bg__orb--2"></div>
+      <div class="cinematic-bg__orb cinematic-bg__orb--3"></div>
+      <div class="cinematic-bg__grain"></div>
+      <div class="cinematic-bg__veil"></div>
+    </div>
 
     <nav class="nav">
       <a class="nav__logo" href="index.html">AU-DELÀ</a>
@@ -138,7 +145,6 @@
     <script type="importmap">
       {
         "imports": {
-          "three": "https://esm.sh/three@0.169.0",
           "gsap": "https://esm.sh/gsap@3.12.5",
           "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger",
           "lenis": "https://esm.sh/lenis@1.3.23"
