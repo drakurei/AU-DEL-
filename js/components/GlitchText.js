@@ -1,53 +1,43 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
-// Reveals [data-glitch] headings with a per-character distortion/glitch effect
-// as they scroll into view.
-const GLYPHS = '!<>-_\\/[]{}—=+*^?#';
-
+// Decodes [data-glitch] headings with GSAP's ScrambleText as they scroll into
+// view: characters churn through random glyphs, then resolve to the real text.
 export default class GlitchText {
   constructor(selector = '[data-glitch]') {
-    document.querySelectorAll(selector).forEach((el) => this._prepare(el));
+    document.querySelectorAll(selector).forEach((el) => this._bind(el));
   }
 
-  _prepare(el) {
-    const text = el.textContent;
-    el.textContent = '';
-    const spans = [...text].map((ch) => {
-      const s = document.createElement('span');
-      s.textContent = ch === ' ' ? ' ' : ch;
-      s.dataset.final = ch;
-      s.style.display = 'inline-block';
-      el.appendChild(s);
-      return s;
-    });
+  _bind(el) {
+    const finalText = el.textContent;
+    // Hold the layout but start hidden so the decode reads as an arrival.
+    el.style.visibility = 'hidden';
 
     ScrollTrigger.create({
       trigger: el,
       start: 'top 85%',
       once: true,
-      onEnter: () => this._scramble(spans),
-    });
-  }
-
-  _scramble(spans) {
-    spans.forEach((span, i) => {
-      const final = span.dataset.final;
-      if (final === ' ' || final === ' ') return;
-      let frame = 0;
-      const total = 8 + Math.floor(Math.random() * 8);
-      gsap.delayedCall(i * 0.04, () => {
-        const id = setInterval(() => {
-          span.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-          frame++;
-          if (frame >= total) {
-            clearInterval(id);
-            span.textContent = final;
+      onEnter: () => {
+        el.style.visibility = 'visible';
+        gsap.fromTo(
+          el,
+          { opacity: 0.4 },
+          {
+            opacity: 1,
+            duration: 1.6,
+            ease: 'power2.out',
+            scrambleText: {
+              text: finalText,
+              chars: 'upperAndLowerCase',
+              speed: 0.6,
+              tweenLength: false,
+            },
           }
-        }, 35);
-      });
+        );
+      },
     });
   }
 }

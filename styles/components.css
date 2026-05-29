@@ -96,6 +96,24 @@
   flex-direction: column;
 }
 
+/* Frosted-glass panel so the CTA floats above the video. */
+.cta .wrap {
+  max-width: 760px;
+  padding: 4rem clamp(1.5rem, 5vw, 4rem);
+  border-radius: 28px;
+  background: rgba(229, 229, 229, 0.04);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* Animated angle for the border beam. */
+@property --beam {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .btn-magnetic {
   position: relative;
   display: inline-flex;
@@ -104,8 +122,8 @@
   margin-top: 2.5rem;
   padding: 1.25rem 2.8rem;
   border-radius: 100px;
-  border: 1px solid var(--color-accent);
-  background: rgba(0, 71, 255, 0.08);
+  border: none;
+  background: rgba(0, 71, 255, 0.10);
   color: var(--color-silver);
   font-size: 0.85rem;
   letter-spacing: 0.24em;
@@ -113,23 +131,54 @@
   cursor: pointer;
   pointer-events: auto;
   will-change: transform;
+  backdrop-filter: blur(8px);
   transition: background 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
-  animation: neonPulse 3s var(--ease-in-out) infinite;
+  box-shadow: 0 0 0 var(--color-accent-glow);
+}
+
+/* Gradient border + traveling light beam, drawn as a masked ring. */
+.btn-magnetic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--beam),
+    rgba(0, 71, 255, 0.25) 0deg,
+    rgba(0, 71, 255, 0.25) 250deg,
+    #8ab4ff 300deg,
+    #ffffff 330deg,
+    rgba(0, 71, 255, 0.25) 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: beamSpin 3s linear infinite;
+  pointer-events: none;
 }
 
 .btn-magnetic span {
   display: inline-block;
+  position: relative;
+  z-index: 1;
   will-change: transform;
 }
 
 .btn-magnetic:hover {
-  background: var(--color-accent);
-  box-shadow: 0 0 40px var(--color-accent-glow);
+  background: rgba(0, 71, 255, 0.28);
+  box-shadow: 0 0 44px var(--color-accent-glow);
 }
 
-@keyframes neonPulse {
-  0%, 100% { box-shadow: 0 0 0 var(--color-accent-glow); }
-  50% { box-shadow: 0 0 36px var(--color-accent-glow); }
+@keyframes beamSpin {
+  to { --beam: 360deg; }
+}
+
+/* Fallback for browsers without @property: static gradient ring. */
+@supports not (background: conic-gradient(from var(--beam), #000, #000)) {
+  .btn-magnetic { border: 1px solid var(--color-accent); }
+  .btn-magnetic::before { display: none; }
 }
 
 /* ---- Programmes cards ---- */

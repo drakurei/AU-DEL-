@@ -10,7 +10,7 @@
   /* Glass */
   --glass-bg: rgba(229, 229, 229, 0.04);
   --glass-border: rgba(229, 229, 229, 0.12);
-  --glass-blur: 18px;
+  --glass-blur: 15px;
 
   /* Typo */
   --font-serif: "Playfair Display", Georgia, serif;
