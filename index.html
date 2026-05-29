@@ -125,6 +125,18 @@
       <span>Mental · Physique · Business</span>
     </footer>
 
+    <!-- Buildless deploy: resolves bare imports from a CDN so the raw source
+         runs directly on static hosting. Vite ignores this map in dev. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://esm.sh/three@0.169.0",
+          "gsap": "https://esm.sh/gsap@3.12.5",
+          "gsap/ScrollTrigger": "https://esm.sh/gsap@3.12.5/ScrollTrigger",
+          "lenis": "https://esm.sh/lenis@1.3.23"
+        }
+      }
+    </script>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>
