@@ -3,6 +3,8 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: '.',
+  // Served from https://drakurei.github.io/AU-DEL-/ on GitHub Pages.
+  base: '/AU-DEL-/',
   build: {
     rollupOptions: {
       input: {

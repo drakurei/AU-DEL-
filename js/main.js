@@ -23,28 +23,33 @@ function initWebGL() {
   const canvas = document.getElementById('webgl');
   if (!canvas) return null;
 
-  const engine = new Engine(canvas);
-  const background = new Background(engine.scene);
-  engine.add(background);
+  // Graceful degradation: if WebGL is unavailable (old GPU, disabled, blocked),
+  // hide the canvas and keep the rest of the site fully functional.
+  try {
+    const engine = new Engine(canvas);
+    const background = new Background(engine.scene);
+    engine.add(background);
 
-  let hero = null;
-  if (document.querySelector('.hero')) {
-    hero = new ParticleField(engine.scene, { word: 'DISCIPLINE' });
-    const camera = new CameraManager(engine.camera);
-    engine.add({ update: () => camera.update() });
-    engine.add(hero);
+    let hero = null;
+    if (document.querySelector('.hero')) {
+      hero = new ParticleField(engine.scene, { word: 'DISCIPLINE' });
+      const camera = new CameraManager(engine.camera);
+      engine.add({ update: () => camera.update() });
+      engine.add(hero);
+    }
+
+    engine.start();
+    return { engine, background, hero };
+  } catch (err) {
+    console.warn('WebGL unavailable, continuing without 3D background.', err);
+    canvas.style.display = 'none';
+    return null;
   }
-
-  engine.start();
-  return { engine, background, hero };
 }
 
-// Scroll-dependent setup runs only after the preloader reveals the page, so
-// ScrollTrigger measures the final layout. webgl/isHome are passed in because
-// the 3D scene starts immediately (behind the curtain) for a seamless reveal.
+// Scroll setup runs up front (the preloader is a fixed overlay that doesn't
+// affect layout), so the experience is wired even if the preloader is slow.
 function wireScroll(webgl, isHome) {
-  initSmoothScroll();
-
   if (isHome) {
     new BentoStats();
     if (!reduceMotion) new GlitchText();
@@ -95,15 +100,22 @@ function wireScroll(webgl, isHome) {
 }
 
 function init() {
-  // The 3D scene and cheap UI start immediately so the scene is already
-  // rendering behind the preloader curtain.
   new PageTransition();
   new MagneticButton();
+
   const webgl = initWebGL();
   const isHome = !!document.querySelector('.hero');
 
-  // Preloader reveals the page, then we wire up everything scroll-related.
-  new Preloader(() => wireScroll(webgl, isHome));
+  // Smooth scroll + all triggers are wired immediately; Lenis is paused while
+  // the preloader covers the screen, then resumed on reveal.
+  const lenis = initSmoothScroll();
+  lenis.stop();
+  wireScroll(webgl, isHome);
+
+  new Preloader(() => {
+    lenis.start();
+    ScrollTrigger.refresh();
+  });
 }
 
 if (document.readyState === 'loading') {
