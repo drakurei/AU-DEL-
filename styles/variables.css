@@ -6,6 +6,8 @@
   --color-silver-dim: #9a9a9a;
   --color-accent: #0047ff;
   --color-accent-glow: rgba(0, 71, 255, 0.55);
+  --color-violet: #8b5cf6;
+  --color-violet-glow: rgba(139, 92, 246, 0.45);
 
   /* Glass */
   --glass-bg: rgba(229, 229, 229, 0.04);

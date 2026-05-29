@@ -7,7 +7,6 @@ import { pinSection, bindVisionReveal } from './core/SectionPinner.js';
 
 import Preloader from './components/Preloader.js';
 import HorizontalScroll from './components/HorizontalScroll.js';
-import MagneticButton from './components/MagneticButton.js';
 import BentoStats from './components/BentoStats.js';
 import GlitchText from './components/GlitchText.js';
 
@@ -68,7 +67,6 @@ function wireScroll(isHome) {
 
 function init() {
   new PageTransition();
-  new MagneticButton();
 
   const isHome = !!document.querySelector('.hero');
 

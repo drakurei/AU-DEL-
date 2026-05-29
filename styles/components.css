@@ -38,7 +38,8 @@
 }
 
 .bento__card:hover {
-  border-color: rgba(0, 71, 255, 0.4);
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 0 28px var(--color-violet-glow);
 }
 
 .bento__card:hover::before {
@@ -204,7 +205,8 @@
 
 .programme:hover {
   transform: translateY(-8px);
-  border-color: rgba(0, 71, 255, 0.4);
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 0 28px var(--color-violet-glow);
 }
 
 .programme__price {
@@ -390,6 +392,14 @@
   overflow: hidden;
   transform-origin: center;
   will-change: transform;
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+/* Subtle electric-violet border glow on hover. */
+.explorer__card:hover {
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.25),
+    0 0 28px var(--color-violet-glow), 0 30px 60px rgba(0, 0, 0, 0.5);
 }
 
 .explorer__card::before {
