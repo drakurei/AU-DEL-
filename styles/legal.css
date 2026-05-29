@@ -1,0 +1,64 @@
+/* ---- Legal pages: sober, readable prose on the dark theme ---- */
+.legal {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24vh var(--gutter) 14vh;
+}
+
+.legal__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.legal h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  text-transform: uppercase;
+  margin: 1rem 0 2.5rem;
+}
+
+.legal h2 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-silver);
+  margin: 2.8rem 0 0.9rem;
+}
+
+.legal p,
+.legal li {
+  color: var(--color-silver-dim);
+  font-weight: 200;
+  line-height: 1.8;
+  font-size: 0.98rem;
+}
+
+.legal p + p { margin-top: 0.9rem; }
+
+.legal ul {
+  margin: 0.6rem 0;
+  padding-left: 1.3rem;
+  list-style: disc;
+}
+
+.legal li { margin-bottom: 0.4rem; }
+
+.legal a { color: var(--color-accent); }
+
+.legal__updated {
+  margin-top: 3.5rem;
+  font-size: 0.82rem;
+  opacity: 0.6;
+}
+
+/* Marks legally-required info the site owner must fill in. */
+.legal .todo {
+  color: #ffb056;
+  border-bottom: 1px dotted rgba(255, 176, 86, 0.5);
+}

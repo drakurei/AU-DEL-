@@ -209,16 +209,61 @@
 .footer {
   position: relative;
   z-index: 1;
-  padding: 4rem var(--gutter) 3rem;
+  padding: 5rem var(--gutter) 3rem;
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.6rem;
   border-top: 1px solid var(--glass-border);
   color: var(--color-silver-dim);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
 }
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer__logo {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  color: var(--color-silver);
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  text-transform: uppercase;
+}
+
+.footer__legal a {
+  position: relative;
+  opacity: 0.7;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.footer__legal a:hover { opacity: 1; }
+
+.footer__legal a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.35s var(--ease-out);
+}
+
+.footer__legal a:hover::after { width: 100%; }
+
+.footer__copy { opacity: 0.6; }
 
 /* ---- Vision (pinned text reveal) ---- */
 .vision {
